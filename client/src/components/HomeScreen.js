@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import ListCard from './ListCard.js'
 import MUIDeleteModal from './MUIDeleteModal'
@@ -9,6 +9,7 @@ import Fab from '@mui/material/Fab'
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid';
+
 /*
     This React component lists all the top5 lists in the UI.
     
@@ -16,6 +17,9 @@ import Grid from '@mui/material/Grid';
 */
 const HomeScreen = () => {
     const { store } = useContext(GlobalStoreContext);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const isMenuOpen = Boolean(anchorEl);
+
 
     useEffect(() => {
         store.loadIdNamePairs();

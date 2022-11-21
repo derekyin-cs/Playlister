@@ -1,3 +1,12 @@
+/** 
+ * TO DO 
+ * USE MUI GRID TO FORMAT LIST CARD
+ * CSS TO ROUND CORNERS
+ * CHANGE BACKGROUND COLOR
+ * LIKE, DISLIKE ICONS
+ * AUTHOR TEXT
+ */
+
 import { useContext, useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import Box from '@mui/material/Box';
@@ -79,7 +88,6 @@ function ListCard(props) {
         cardStatus = true;
     }
 
-    // Use MUI Grid to format the list card
     let cardElement =
         <ListItem
             id={idNamePair._id}
