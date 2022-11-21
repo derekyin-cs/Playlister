@@ -3,10 +3,12 @@ import { GlobalStoreContext } from '../store'
 import ListCard from './ListCard.js'
 import MUIDeleteModal from './MUIDeleteModal'
 import NavToolbar from './NavToolbar.js'
+import MediaWrapper from './MediaWrapper.js'
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab'
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid';
 /*
     This React component lists all the top5 lists in the UI.
     
@@ -57,12 +59,23 @@ const HomeScreen = () => {
                 <Typography variant="h2">Your Lists</Typography>
             </div>
             <NavToolbar />
-            <div id="list-selector-list">
-                {
-                    listCard
-                }
-                <MUIDeleteModal />
-            </div>
+
+            <Grid container spacing ={2}>
+                <Grid item xs={7}>
+                <div id="list-selector-list">
+                    {
+                        listCard
+                 }
+                    <MUIDeleteModal />
+                </div>
+                </Grid>
+
+                <Grid item xs={5}>
+                    <MediaWrapper />
+                </Grid>
+
+            </Grid>
+            
 
 
         </div>)
