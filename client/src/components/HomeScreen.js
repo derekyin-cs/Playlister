@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { GlobalStoreContext } from '../store'
 import ListCard from './ListCard.js'
 import MUIDeleteModal from './MUIDeleteModal'
-
+import NavToolbar from './NavToolbar.js'
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab'
 import List from '@mui/material/List';
@@ -56,6 +56,7 @@ const HomeScreen = () => {
             </Fab>
                 <Typography variant="h2">Your Lists</Typography>
             </div>
+            <NavToolbar />
             <div id="list-selector-list">
                 {
                     listCard

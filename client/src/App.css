@@ -80,6 +80,18 @@ body {
   float: right;
 }
 
+#nav-toolbar {
+  position: absolute;
+  left: 0%;
+  top: 10%;
+  width: 100%;
+  height: 10%;
+  background-color: var(--swatch-status);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .playlister-button,
 .playlister-button-disabled {
   font-size: 36pt;
@@ -115,6 +127,8 @@ body {
   height: 80%;
   background-color: var(--swatch-primary);
 }
+
+
 
 #playlister-workspace {
   position: absolute;
@@ -176,9 +190,9 @@ body {
   max-height: 83%;
   position: absolute;
   left: 0%;
-  top: 10%;
-  width: 55%;
-  height: 90%;
+  top: 20%;
+  width: 50%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -290,6 +304,8 @@ input {
 .disabled:hover {
   color: var(--swatch-neutral);
 }
+
+
 
 /* THIS STYLE SHEET MANAGES STYLE FOR OUR MODAL, i.e. DIALOG BOX */
 
