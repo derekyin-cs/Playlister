@@ -6,7 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
-
+import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined';
+import Button from '@mui/material/Button';
 /*
     This is a card in our list of playlists. It lets select
     a list for editing and it has controls for changing its 
@@ -47,6 +48,10 @@ function ListCard(props) {
         setEditActive(newActive);
     }
 
+    function handleDropDown (event) {
+        event.stopPropagation();
+    }
+
     async function handleDeleteList(event, id) {
         event.stopPropagation();
         let _id = event.target.id;
@@ -73,6 +78,8 @@ function ListCard(props) {
     if (store.isListNameEditActive) {
         cardStatus = true;
     }
+
+    // Use MUI Grid to format the list card
     let cardElement =
         <ListItem
             id={idNamePair._id}
@@ -85,6 +92,10 @@ function ListCard(props) {
             }}
         >
             <Box sx={{ p: 1, flexGrow: 1, overflowX: 'auto' }}>{idNamePair.name}</Box>
+            <Button>
+            <KeyboardDoubleArrowDownOutlinedIcon onClick = {handleDropDown} />
+            </Button>
+            
             <Box sx={{ p: 1 }}>
                 <IconButton onClick={handleToggleEdit} aria-label='edit'>
                     <EditIcon style={{fontSize:'48pt'}} />
