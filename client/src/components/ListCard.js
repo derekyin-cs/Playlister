@@ -161,11 +161,11 @@ function ListCard(props) {
             id={idNamePair._id}
             key={idNamePair._id}
             sx={{ marginTop: '15px', display: 'flex', p: 1 }}
-            style={{ width: '100%', fontSize: '20pt', backgroundColor: '#f5f5f5', borderRadius: '10px', border: '1px solid #e0e0e0' }}
+            style={{ width: '100%', fontSize: '20pt', backgroundColor: '#f5f5f5', borderRadius: '10px', border: '3px solid #e0e0e0' }}
         >
             <Box sx={{ p: 1, flexGrow: 1, overflowX: 'auto' }}>
                 <Grid container spacing = {.3} >
-                    <Grid item xs={8} fontWeight="bold">
+                    <Grid item xs={8} fontWeight="bold" onClick={handleToggleEdit}>
                         {idNamePair.name}
                     </Grid>
                     <Grid item xs={4}>
@@ -174,7 +174,7 @@ function ListCard(props) {
                         <Button><ThumbDownAltOutlinedIcon /></Button>
                     </Grid>
                     <Grid item xs={12} fontSize = {14}>
-                        By:
+                        By: {}
                     </Grid>
                     <Grid item xs={2} fontSize={14}>
                         Published: 

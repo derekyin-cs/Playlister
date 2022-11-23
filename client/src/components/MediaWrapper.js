@@ -1,28 +1,50 @@
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { GlobalStoreContext } from '../store/index.js'
+import { useContext } from 'react';
 export default function MediaWrapper() {
+    const { store } = useContext(GlobalStoreContext);
 
 
+    function handleSwitchPlayer() {
+        // TODO
+        store.switchToPlayer();
+    }
+
+    function handleSwitchComments() {
+        store.switchToComments();
+    }
     // conditionally render player or comments based on which tab is pressed
     // state variable for which tab is pressed
 
     // box for comment section
     // box for player
-    let comments = "";
+    let media = "";
 
-    if (true) {
-        comments = (
-            <Box sx={{ bgcolor: 'background.paper', p: 2, flexGrow: 1 }}>
-                <Typography variant="h5" component="div" gutterBottom>
-                    Comments
-                </Typography>
-                <Typography variant="body1">
-                    Comments go here
-                </Typography>
+    if (store.currentMedia == "COMMENTS") {
+        media = (
+            <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
+                <div id = "media-comments-list">
+
+                </div>
             </Box>
         )
-    } 
+    }
+
+    else if (store.currentMedia == "PLAYER") {
+        media = "";
+        //TODO: IMPLEMENT YOUTUBE API
+    }
+    
+    let playerButtonColor = "blue";
+    let commentsButtonColor = "blue";
+    if (store.currentMedia === "PLAYER") {
+        playerButtonColor = "darkblue";
+    }
+    else {
+        commentsButtonColor = "darkblue";
+    }
 
 
     return (
@@ -33,11 +55,13 @@ export default function MediaWrapper() {
         <div id="media-wrapper">
 
             <div id = "media-wrapper-tabs">
-                <Button variant="contained" color="primary">Player</Button>
-                <Button variant="contained" color="primary">Comments</Button>
+                <Button variant="contained" style ={{backgroundColor:playerButtonColor}} onClick={handleSwitchPlayer}>Player</Button>
+                <Button variant="contained" style ={{backgroundColor:commentsButtonColor}} onClick = {handleSwitchComments}>Comments</Button>
             </div>
 
-            {comments}
+
+
+            {media}
             
 
         </div>
