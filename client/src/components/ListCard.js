@@ -104,7 +104,7 @@ function ListCard(props) {
             }}
         >
             <Box sx={{ p: 1, flexGrow: 1, overflowX: 'auto' }}>
-                <Grid container spacing = {.1} justify = "space-between">
+                <Grid container spacing = {.3} >
                     <Grid item xs={8} fontWeight="bold">
                         {idNamePair.name}
                     </Grid>
@@ -119,10 +119,11 @@ function ListCard(props) {
                     <Grid item xs={2} fontSize={14}>
                         Published: 
                     </Grid>
+                    <Grid item xs={6} />
                     <Grid item xs={2} fontSize={14} >
                         Listens:
                     </Grid>
-                    <Grid item xs={8} >
+                    <Grid item xs={2} >
                         <Button >
                         <KeyboardDoubleArrowDownOutlinedIcon onClick = {handleDropDown} />
                         </Button>
