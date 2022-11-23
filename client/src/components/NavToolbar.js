@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import SortOutlinedIcon from '@mui/icons-material/SortOutlined';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom'
 
 export default function NavToolbar() {
@@ -48,30 +49,54 @@ export default function NavToolbar() {
     )
     return (
         <div id="nav-toolbar">
-            <Button>
-                <HomeOutlinedIcon />
-            </Button>
 
-            <Button>
-                <GroupsOutlinedIcon />
-            </Button>
+            <Grid container spacing = {2}>
+                <Grid item xs={3}>
+                    <Button>
+                        <HomeOutlinedIcon />
+                    </Button>
+                    <Button>
+                        <GroupsOutlinedIcon />
+                    </Button>
+                    <Button>
+                        <PersonOutlineOutlinedIcon />
+                    </Button>
+                </Grid>
 
-            <Button>
-                <PersonOutlineOutlinedIcon />
-            </Button>
+                <Grid item xs={1.5}>
+                    
+                </Grid>
 
-            <div id = "nav-toolbar-search">
-                <input type="text" placeholder="Search" />
-            </div>
+                <Grid item xs={2.5}>
+                    <div id = "nav-toolbar-search">
+                        <input type="text" placeholder="Search" />
+                    </div>
+                </Grid>
 
-            <Button
-                onClick = {handleMenuOpen}
-                aria-controls={menuId}
-                aria-haspopup="true"
-            >
-                <SortOutlinedIcon />
-                Sort By
-            </Button>
+                <Grid item xs={3} />
+
+                <Grid item xs={2}>
+                    <Button
+                    onClick = {handleMenuOpen}
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    >
+                        Sort By 
+                        <SortOutlinedIcon />
+                        
+                    </Button>
+                </Grid>
+
+            </Grid>
+            
+
+            
+
+            
+
+            
+
+            
 
             {menu}
 

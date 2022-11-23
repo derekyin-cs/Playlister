@@ -16,11 +16,13 @@ import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
 import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined';
+import KeyboardDoubleArrowUpOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowUpOutlined';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Item from '@mui/material/Grid';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
+import WorkspaceScreen from './WorkspaceScreen';
 /*
     This is a card in our list of playlists. It lets select
     a list for editing and it has controls for changing its 
@@ -83,6 +85,11 @@ function ListCard(props) {
         setText(event.target.value);
     }
 
+    const handleCloseList = (event) => {
+        event.stopPropagation();
+        store.closeCurrentList();
+    }
+
     let selectClass = "unselected-list-card";
     if (selected) {
         selectClass = "selected-list-card";
@@ -90,6 +97,35 @@ function ListCard(props) {
     let cardStatus = false;
     if (store.isListNameEditActive) {
         cardStatus = true;
+    }
+
+    let dropDownButton = (
+        <Button >
+            <KeyboardDoubleArrowDownOutlinedIcon 
+                onClick = {(event) => {
+                handleLoadList(event, idNamePair._id)
+                }} 
+            />
+        </Button>
+        );
+
+    let workspace = "";
+    let workspaceToolbar = "";
+    if (store.currentList && store.currentList._id === idNamePair._id) {
+        workspace = (
+            <WorkspaceScreen />
+            );
+        workspaceToolbar = (
+            <Grid container spacing={2}>
+                <Grid item xs={10} />
+                <Grid item xs={2}>
+                    <Button>
+                        <KeyboardDoubleArrowUpOutlinedIcon onClick = {handleCloseList} />
+                    </Button>
+                </Grid>
+            </Grid>
+        );
+        dropDownButton = "";
     }
 
     let cardElement =
@@ -124,11 +160,12 @@ function ListCard(props) {
                         Listens:
                     </Grid>
                     <Grid item xs={2} >
-                        <Button >
-                        <KeyboardDoubleArrowDownOutlinedIcon onClick = {handleDropDown} />
-                        </Button>
+                        {dropDownButton}
                     </Grid>
                 </Grid>
+
+                {workspace}
+                {workspaceToolbar}
                 
             </Box>
 
