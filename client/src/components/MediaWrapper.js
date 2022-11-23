@@ -6,10 +6,12 @@ import { useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import List from '@mui/material/List';
 import CommentCard from './CommentCard.js';
+import AuthContext from '../auth';
 // import auth
 
 export default function MediaWrapper() {
     const { store } = useContext(GlobalStoreContext);
+    const { auth } = useContext(AuthContext);
 
 
     function handleSwitchPlayer() {
@@ -23,7 +25,8 @@ export default function MediaWrapper() {
 
     function handleKeyPress(event) {
         if (event.code === "Enter") {
-            let comment = {username: "hello", comment: event.target.value};
+            let username = auth.user.firstName + " " + auth.user.lastName;
+            let comment = {username: username, comment: event.target.value};
             console.log(comment);
             event.target.value = "";
             store.addComment(comment);
