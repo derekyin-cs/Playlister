@@ -17,6 +17,10 @@ import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
 import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Item from '@mui/material/Grid';
+import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 /*
     This is a card in our list of playlists. It lets select
     a list for editing and it has controls for changing its 
@@ -93,18 +97,50 @@ function ListCard(props) {
             id={idNamePair._id}
             key={idNamePair._id}
             sx={{ marginTop: '15px', display: 'flex', p: 1 }}
-            style={{ width: '100%', fontSize: '20pt',  }}
+            style={{ width: '100%', fontSize: '20pt', backgroundColor: '#f5f5f5', borderRadius: '10px', border: '1px solid #e0e0e0' }}
             button
             onClick={(event) => {
                 handleLoadList(event, idNamePair._id)
             }}
         >
-            <Box sx={{ p: 1, flexGrow: 1, overflowX: 'auto' }}>{idNamePair.name}</Box>
-            <Button>
-            <KeyboardDoubleArrowDownOutlinedIcon onClick = {handleDropDown} />
-            </Button>
+            <Box sx={{ p: 1, flexGrow: 1, overflowX: 'auto' }}>
+                <Grid container spacing = {.1} justify = "space-between">
+                    <Grid item xs={8} fontWeight="bold">
+                        {idNamePair.name}
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Button><ThumbUpAltOutlinedIcon /></Button>
+                        
+                        <Button><ThumbDownAltOutlinedIcon /></Button>
+                    </Grid>
+                    <Grid item xs={12} fontSize = {14}>
+                        By:
+                    </Grid>
+                    <Grid item xs={2} fontSize={14}>
+                        Published: 
+                    </Grid>
+                    <Grid item xs={2} fontSize={14} >
+                        Listens:
+                    </Grid>
+                    <Grid item xs={8} >
+                        <Button >
+                        <KeyboardDoubleArrowDownOutlinedIcon onClick = {handleDropDown} />
+                        </Button>
+                    </Grid>
+                </Grid>
+                
+            </Box>
+
+
+
+           
             
-            <Box sx={{ p: 1 }}>
+            
+            
+            
+        </ListItem>
+/**
+<Box sx={{ p: 1 }}>
                 <IconButton onClick={handleToggleEdit} aria-label='edit'>
                     <EditIcon style={{fontSize:'48pt'}} />
                 </IconButton>
@@ -116,8 +152,7 @@ function ListCard(props) {
                     <DeleteIcon style={{fontSize:'48pt'}} />
                 </IconButton>
             </Box>
-        </ListItem>
-
+ */
     if (editActive) {
         cardElement =
             <TextField
