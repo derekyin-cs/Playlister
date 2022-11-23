@@ -91,6 +91,11 @@ function ListCard(props) {
         store.closeCurrentList();
     }
 
+    function handleDuplicateList(event) {
+        event.stopPropagation();
+        store.duplicateList();
+    }
+
     let selectClass = "unselected-list-card";
     if (selected) {
         selectClass = "selected-list-card";
@@ -135,6 +140,7 @@ function ListCard(props) {
                     </Button>
                     <Button
                         variant="contained"
+                        onClick={handleDuplicateList}
                     >
                         Duplicate
                     </Button>

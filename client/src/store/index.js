@@ -311,6 +311,29 @@ function GlobalStoreContextProvider(props) {
         }
     }
 
+    store.duplicateList = async function () {
+        let newListName = store.currentList.name + " " + (store.newListCounter + 1);
+        let newListSongs = store.currentList.songs; 
+        const response = await api.createPlaylist(newListName, newListSongs, auth.user.email);
+        if (response.status === 201) {
+            tps.clearAllTransactions();
+            let newList = response.data.playlist;
+            storeReducer({
+                type: GlobalStoreActionType.CREATE_NEW_LIST,
+                payload: newList
+            }
+            );
+            history.push("/");
+            store.loadIdNamePairs();
+
+            // IF IT'S A VALID LIST THEN LET'S START EDITING IT
+            //history.push("/playlist/" + newList._id);
+        }
+        else {
+            console.log("API FAILED TO CREATE A NEW LIST");
+        }
+    }
+
     // THIS FUNCTION LOADS ALL THE ID, NAME PAIRS SO WE CAN LIST ALL THE LISTS
     store.loadIdNamePairs = function () {
         async function asyncLoadIdNamePairs() {
