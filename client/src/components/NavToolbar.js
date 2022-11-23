@@ -8,6 +8,7 @@ import SortOutlinedIcon from '@mui/icons-material/SortOutlined';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom'
 
 export default function NavToolbar() {
@@ -51,7 +52,7 @@ export default function NavToolbar() {
         <div id="nav-toolbar">
 
             <Grid container spacing = {2}>
-                <Grid item xs={3}>
+                <Grid item xs={2.5}>
                     <Button>
                         <HomeOutlinedIcon />
                     </Button>
@@ -63,17 +64,15 @@ export default function NavToolbar() {
                     </Button>
                 </Grid>
 
-                <Grid item xs={1.5}>
+                <Grid item xs={2}>
                     
                 </Grid>
 
-                <Grid item xs={2.5}>
-                    <div id = "nav-toolbar-search">
-                        <input type="text" placeholder="Search" />
-                    </div>
+                <Grid item xs={3}>
+                    <TextField id="nav-toolbar-search" fullWidth placeholder="Search..."  size = "small" variant="outlined" style={{backgroundColor:"white"}} />
                 </Grid>
 
-                <Grid item xs={3} />
+                <Grid item xs={2} />
 
                 <Grid item xs={2}>
                     <Button

@@ -635,6 +635,12 @@ function GlobalStoreContextProvider(props) {
         });    
     }
 
+    store.addComment = (comment) => {
+        let list = store.currentList;
+        list.comments.push(comment);
+        store.updateCurrentList();
+    }
+
     return (
         <GlobalStoreContext.Provider value={{
             store

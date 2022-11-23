@@ -3,6 +3,11 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { GlobalStoreContext } from '../store/index.js'
 import { useContext } from 'react';
+import TextField from '@mui/material/TextField';
+import List from '@mui/material/List';
+import CommentCard from './CommentCard.js';
+// import auth
+
 export default function MediaWrapper() {
     const { store } = useContext(GlobalStoreContext);
 
@@ -15,21 +20,73 @@ export default function MediaWrapper() {
     function handleSwitchComments() {
         store.switchToComments();
     }
+
+    function handleKeyPress(event) {
+        if (event.code === "Enter") {
+            let comment = {username: "hello", comment: event.target.value};
+            console.log(comment);
+            event.target.value = "";
+            store.addComment(comment);
+        }
+    }
     // conditionally render player or comments based on which tab is pressed
     // state variable for which tab is pressed
 
     // box for comment section
     // box for player
     let media = "";
+    let commentBar = "";
+    let commentCard = "";
 
+    // if (store.currentList){
+    //     if (store.currentList.currentSong){
+    //         if (store.currentList.currentSong.youTubeId){
+    //             media = (
+    //                 <Box sx={{ width: '100%' }}>
+    //                     <iframe
+    //                         width="560"
+    //                         height="315"
+    //                         src={`https://www.youtube.com/embed/${store.currentList.currentSong.youTubeId}`}
+    //                         title="YouTube video player"
+    //                         frameBorder="0"
+    //                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    //                         allowFullScreen
+    //                     />
+    //                 </Box>
+    //             )
+    //         }
+    //     }
+    // }
+
+    if (store.currentList && store.currentMedia == "COMMENTS" && store.currentList.comments.length > 0) {
+        commentCard = 
+        <List sx={{ width: '90%', left: '5%', bgcolor: 'background.paper' }}>
+        {
+            store.currentList.comments.map((comments) => (
+                <CommentCard
+                    username={comments.username}
+                    comment={comments.comment}
+                    selected={false}
+                />
+            ))
+        }
+        </List>;
+    }
     if (store.currentMedia == "COMMENTS") {
         media = (
             <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
-                <div id = "media-comments-list">
-
-                </div>
+                {commentCard}
             </Box>
-        )
+            
+        );
+        commentBar = (
+            <TextField 
+                id="media-add-comment" 
+                placeholder="Add comment" 
+                variant="outlined" 
+                onKeyPress={handleKeyPress} 
+                />
+        );
     }
 
     else if (store.currentMedia == "PLAYER") {
@@ -62,6 +119,8 @@ export default function MediaWrapper() {
 
 
             {media}
+            {commentBar}
+            
             
 
         </div>
