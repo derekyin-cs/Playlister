@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect} from 'react'
 import { GlobalStoreContext } from '../store'
 import ListCard from './ListCard.js'
 import MUIDeleteModal from './MUIDeleteModal'
@@ -17,8 +17,7 @@ import Grid from '@mui/material/Grid';
 */
 const HomeScreen = () => {
     const { store } = useContext(GlobalStoreContext);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const isMenuOpen = Boolean(anchorEl);
+    
 
 
     useEffect(() => {

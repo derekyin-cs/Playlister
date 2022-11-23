@@ -23,6 +23,7 @@ import Item from '@mui/material/Grid';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import WorkspaceScreen from './WorkspaceScreen';
+import EditToolbar from './EditToolbar';
 /*
     This is a card in our list of playlists. It lets select
     a list for editing and it has controls for changing its 
@@ -117,6 +118,27 @@ function ListCard(props) {
             );
         workspaceToolbar = (
             <Grid container spacing={2}>
+                <Grid item>
+                    <EditToolbar />
+                </Grid>
+                <Grid item>
+                    <Button variant="contained"
+                    >
+                        Publish
+                    </Button>
+                    <Button variant="contained"
+                        onClick={(event) => {
+                            handleDeleteList(event, idNamePair._id)
+                        }}
+                    >
+                        Delete
+                    </Button>
+                    <Button
+                        variant="contained"
+                    >
+                        Duplicate
+                    </Button>
+                </Grid>
                 <Grid item xs={10} />
                 <Grid item xs={2}>
                     <Button onClick = {handleCloseList}>
