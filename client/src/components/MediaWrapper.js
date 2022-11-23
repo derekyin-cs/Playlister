@@ -77,7 +77,7 @@ export default function MediaWrapper() {
     }
     if (store.currentMedia == "COMMENTS") {
         media = (
-            <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
+            <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black', overflowY: "scroll", flexDirection: "column-reverse" }}>
                 {commentCard}
             </Box>
             
@@ -112,7 +112,7 @@ export default function MediaWrapper() {
 
 
         // player button
-        <div id="media-wrapper">
+        <Box id="media-wrapper">
 
             <div id = "media-wrapper-tabs">
                 <Button variant="contained" style ={{backgroundColor:playerButtonColor}} onClick={handleSwitchPlayer}>Player</Button>
@@ -126,7 +126,7 @@ export default function MediaWrapper() {
             
             
 
-        </div>
+        </Box>
 
     );
 }
