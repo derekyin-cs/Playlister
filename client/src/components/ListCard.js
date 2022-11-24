@@ -24,6 +24,7 @@ import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import WorkspaceScreen from './WorkspaceScreen';
 import EditToolbar from './EditToolbar';
+import AuthContext from '../auth'
 /*
     This is a card in our list of playlists. It lets select
     a list for editing and it has controls for changing its 
@@ -36,6 +37,7 @@ function ListCard(props) {
     const [editActive, setEditActive] = useState(false);
     const [text, setText] = useState("");
     const { idNamePair, selected } = props;
+    const { auth } = useContext(AuthContext);
 
     function handleLoadList(event, id) {
         console.log("handleLoadList for " + id);
@@ -150,6 +152,7 @@ function ListCard(props) {
                         onClick={(event) => {
                             handleDeleteList(event, idNamePair._id)
                         }}
+                        disabled = {idNamePair.username !== auth.user.email }
                     >
                         Delete
                     </Button>

@@ -495,7 +495,16 @@ function GlobalStoreContextProvider(props) {
     }
     store.deleteMarkedList = function() {
         store.deleteList(store.listIdMarkedForDeletion);
-        store.loadIdNamePairs();
+        if (store.currentView === "HOME"){
+            store.loadIdNamePairs();
+        }
+        else if (store.currentView === "COMMUNITY"){
+            store.switchToCommunity();
+        }
+        else {
+            store.switchToUsers();
+        }
+        
         store.hideModals();
     }
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
@@ -740,7 +749,6 @@ function GlobalStoreContextProvider(props) {
             const response = await api.getPublishedPlaylistPairs();
             if (response.data.success) {
                 let pairsArray = response.data.idNamePairs;
-                console.log("ALL PUBLISHED PLAYLISTS" + pairsArray);
                 storeReducer({
                     type: GlobalStoreActionType.SWITCH_TO_COMMUNITY,
                     payload: pairsArray

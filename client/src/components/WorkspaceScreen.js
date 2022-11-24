@@ -74,11 +74,11 @@ function WorkspaceScreen() {
             // display songs as a list
             
         }
-        if (auth.user)  {
-        if (auth.user.email !== store.currentList.ownerEmail) {
-            errorMessage = "User does not own this playlist";
-        }   
-        }          
+        // if (auth.user)  {
+        // if (auth.user.email !== store.currentList.ownerEmail) {
+        //     errorMessage = "User does not own this playlist";
+        // }   
+        // }          
     }
     let errorModal = "";
     if (errorMessage !== "") {
