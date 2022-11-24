@@ -56,6 +56,12 @@ function ListCard(props) {
         toggleEdit();
     }
 
+    function handlePublishList(event) {
+        event.stopPropagation();
+        store.publishCurrentList();
+    }
+        
+
     function toggleEdit() {
         let newActive = !editActive;
         if (newActive) {
@@ -127,7 +133,9 @@ function ListCard(props) {
                     <EditToolbar />
                 </Grid>
                 <Grid item>
-                    <Button variant="contained"
+                    <Button 
+                        variant="contained"
+                        onClick = {handlePublishList}
                     >
                         Publish
                     </Button>
@@ -156,6 +164,20 @@ function ListCard(props) {
         dropDownButton = "";
     }
 
+
+    let published = "";
+    let listens = "";
+    let likeButton = "";
+    let dislikeButton = "";
+    if (idNamePair.published) {
+        let date = new Date(idNamePair.publishedDate).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"});
+        published = "Published: " + date;
+        listens = "Listens: " + idNamePair.listens;
+        likeButton = (<Button><ThumbUpAltOutlinedIcon /></Button>);
+        dislikeButton = (<Button><ThumbDownAltOutlinedIcon /></Button>);
+        // TODO: ADD LIKE, DISLIKE STATS 
+    }
+
     let cardElement =
         <ListItem
             id={idNamePair._id}
@@ -169,19 +191,19 @@ function ListCard(props) {
                         {idNamePair.name}
                     </Grid>
                     <Grid item xs={4}>
-                        <Button><ThumbUpAltOutlinedIcon /></Button>
+                        {likeButton}
+                        {dislikeButton}
                         
-                        <Button><ThumbDownAltOutlinedIcon /></Button>
                     </Grid>
                     <Grid item xs={12} fontSize = {14}>
-                        By: {}
+                        By: {idNamePair.username}
                     </Grid>
                     <Grid item xs={2} fontSize={14}>
-                        Published: 
+                        {published}
                     </Grid>
                     <Grid item xs={6} />
                     <Grid item xs={2} fontSize={14} >
-                        Listens:
+                        {listens}
                     </Grid>
                     <Grid item xs={2} >
                         {dropDownButton}

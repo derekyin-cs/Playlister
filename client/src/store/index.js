@@ -642,6 +642,15 @@ function GlobalStoreContextProvider(props) {
         store.updateCurrentList();
     }
 
+    store.publishCurrentList = () => {
+        let list = store.currentList;
+        list.published = true;
+        let d = new Date();
+        list.publishedDate = d;
+        list.listens = 0;
+        store.updateCurrentList();
+    }
+
     return (
         <GlobalStoreContext.Provider value={{
             store

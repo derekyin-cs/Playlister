@@ -18,7 +18,10 @@ const playlistSchema = new Schema(
         comments: { type : [{
             username: String,
             comment: String
-        }], required: true }
+        }], required: true },
+        published: { type: Boolean, required: true, default: false },
+        publishedDate: { type: Date, required: false },
+        listens: { type: Number, required: false }
     },
     { timestamps: true },
 )
