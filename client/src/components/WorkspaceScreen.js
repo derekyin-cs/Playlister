@@ -11,7 +11,8 @@ import AlertTitle from '@mui/material/AlertTitle';
 import { Alert } from '@mui/material';
 import Button from '@mui/material/Button';
 import { GlobalStoreContext } from '../store/index.js'
-import AuthContext from '../auth/index.js'
+import AuthContext from '../auth/index.js';
+import Typography from '@mui/material/Typography';
 /*
     This React component lets us edit a loaded list, which only
     happens when we are on the proper route.
@@ -40,7 +41,8 @@ function WorkspaceScreen() {
     }
     let songList = "";
     if (store.currentList) {
-        songList = <List 
+        if (!store.currentList.published){
+            songList = <List 
             id="playlist-cards" 
             sx={{ width: '100%', bgcolor: 'background.paper'}}
         >
@@ -55,12 +57,28 @@ function WorkspaceScreen() {
                 ))  
                 
             }
-         </List>; 
-         if (auth.user)  {
-            if (auth.user.email !== store.currentList.ownerEmail) {
-                errorMessage = "User does not own this playlist";
-            }   
-         }          
+         </List>;
+        }
+        else {
+            songList = <List 
+            id="playlist-cards" 
+            sx={{ width: '100%', bgcolor: 'background.paper'}}
+            >
+            {
+                store.currentList.songs.map((song, index) => (
+                    <Typography>{index+1 + ". " + song.title + " by " + song.artist}</Typography>
+                ))  
+                
+            }
+            </List>;
+            // display songs as a list
+            
+        }
+        if (auth.user)  {
+        if (auth.user.email !== store.currentList.ownerEmail) {
+            errorMessage = "User does not own this playlist";
+        }   
+        }          
     }
     let errorModal = "";
     if (errorMessage !== "") {
