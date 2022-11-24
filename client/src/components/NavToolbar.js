@@ -24,6 +24,18 @@ export default function NavToolbar() {
         setAnchorEl(null);
     };
 
+    function handleSwitchToHome() {
+        store.switchToHome();
+    }
+
+    function handleSwitchToCommunity() {
+        store.switchToCommunity();
+    }
+
+    function handleSwitchToUsers() {
+        store.switchToUsers();
+    }
+
     let menuId = "nav-toolbar-sort-by";
     let menu = (
         <Menu
@@ -53,13 +65,13 @@ export default function NavToolbar() {
 
             <Grid container spacing = {2}>
                 <Grid item xs={2.5}>
-                    <Button>
+                    <Button onClick = {handleSwitchToHome}>
                         <HomeOutlinedIcon />
                     </Button>
-                    <Button>
+                    <Button onClick = {handleSwitchToCommunity}>
                         <GroupsOutlinedIcon />
                     </Button>
-                    <Button>
+                    <Button onClick = {handleSwitchToUsers}>
                         <PersonOutlineOutlinedIcon />
                     </Button>
                 </Grid>

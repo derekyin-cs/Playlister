@@ -45,7 +45,7 @@ function EditToolbar() {
                         <RedoIcon />
                 </Button>
                 <Button
-                    disabled={!store.canAddNewSong()}
+                    disabled={!store.canAddNewSong() || store.currentList.published}
                     id='add-song-button'
                     onClick={handleAddNewSong}
                     variant="contained">

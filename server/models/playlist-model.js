@@ -19,7 +19,7 @@ const playlistSchema = new Schema(
             username: String,
             comment: String
         }], required: true },
-        published: { type: Boolean, required: true, default: false },
+        published: { type: Boolean, required: true },
         publishedDate: { type: Date, required: false },
         listens: { type: Number, required: false }
     },
