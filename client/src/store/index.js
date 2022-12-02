@@ -861,44 +861,48 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.sortByName = function () {
-        async function asyncSortByName() {
-            let response = "";
-            if (store.currentView === CurrentView.HOME) {
-                response = await api.getPlaylistPairs();
-            }
-            else {
-                response = await api.getPublishedPlaylistPairs();
-            }
-
-            if (response.data.success) {
-                let pairsArray = response.data.idNamePairs;
+        let pairsArray = store.idNamePairs;
                 pairsArray.sort((a, b) => (a.name > b.name) ? 1 : -1);
                 storeReducer({
                     type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
                     payload: pairsArray
                 });
-            }
-            
-                
-        }
-            
-        asyncSortByName();
     }
 
     store.sortByPublishDate = function () {
-
+        let pairsArray = store.idNamePairs;
+                pairsArray.sort((a, b) => (a.publishedDate < b.publishedDate) ? 1 : -1);
+                storeReducer({
+                    type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
+                    payload: pairsArray
+                });
     }
 
     store.sortByListens = function () {
-
+        let pairsArray = store.idNamePairs;
+                pairsArray.sort((a, b) => (a.listens < b.listens) ? 1 : -1);
+                storeReducer({
+                    type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
+                    payload: pairsArray
+                });
     }
 
     store.sortByLikes = function () {
-
+        let pairsArray = store.idNamePairs;
+                pairsArray.sort((a, b) => (a.likes.length < b.likes.length) ? 1 : -1);
+                storeReducer({
+                    type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
+                    payload: pairsArray
+                });
     }
 
     store.sortByDislikes = function () {
-
+        let pairsArray = store.idNamePairs;
+                pairsArray.sort((a, b) => (a.dislikes.length < b.dislikes.length) ? 1 : -1);
+                storeReducer({
+                    type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
+                    payload: pairsArray
+                });
     }
 
     return (
