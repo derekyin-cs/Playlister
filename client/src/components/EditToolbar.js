@@ -32,14 +32,14 @@ function EditToolbar() {
     return (
         <div id="edit-toolbar">
                 <Button 
-                    disabled={!store.canUndo()}
+                    disabled={!store.canUndo() || store.currentList.published}
                     id='undo-button'
                     onClick={handleUndo}
                     variant="contained">
                         <UndoIcon />
                 </Button>
                 <Button 
-                    disabled={!store.canRedo()}
+                    disabled={!store.canRedo() || store.currentList.published}
                     id='redo-button'
                     onClick={handleRedo}
                     variant="contained">

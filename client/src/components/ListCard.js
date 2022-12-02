@@ -160,7 +160,7 @@ function ListCard(props) {
                         onClick={(event) => {
                             handleDeleteList(event, idNamePair._id)
                         }}
-                        disabled = {idNamePair.username !== auth.user.email }
+                        disabled = {idNamePair.username !== auth.user.username }
                     >
                         Delete
                     </Button>

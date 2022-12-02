@@ -25,7 +25,7 @@ export default function MediaWrapper() {
 
     function handleKeyPress(event) {
         if (event.code === "Enter") {
-            let username = auth.user.firstName + " " + auth.user.lastName;
+            let username = auth.user.username;
             let comment = {username: username, comment: event.target.value};
             console.log(comment);
             event.target.value = "";
