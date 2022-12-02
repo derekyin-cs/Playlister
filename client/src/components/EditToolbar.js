@@ -28,6 +28,7 @@ function EditToolbar() {
     function handleClose() {
         store.closeCurrentList();
     }
+
     return (
         <div id="edit-toolbar">
                 <Button 

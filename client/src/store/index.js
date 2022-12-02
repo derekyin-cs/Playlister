@@ -783,13 +783,26 @@ function GlobalStoreContextProvider(props) {
             let response = await api.getPlaylistById(id);
             if (response.data.success) {
                 let playlist = response.data.playlist;
-
-                playlist.likes.push({username: auth.user.email} );
+                if (playlist.dislikes.includes(auth.user.email)) {
+                    playlist.dislikes.splice(playlist.dislikes.indexOf(auth.user.email), 1);
+                    playlist.likes.push(auth.user.email);
+                }
+                else if (!playlist.likes.includes(auth.user.email)) {
+                    playlist.likes.push(auth.user.email );
+                }
                 response = await api.updatePlaylistById(playlist._id, playlist);
                 if (response.data.success) {
                     console.log("SUCCESSFULLY LIKED LIST");
                     //history.push("/playlist/" + playlist._id);
-                    store.loadIdNamePairs();
+                    if (store.currentView === CurrentView.HOME) {
+                        store.loadIdNamePairs();
+                    }
+                    else if (store.currentView === CurrentView.COMMUNITY) {
+                        store.switchToCommunity();
+                    }
+                    else {
+                        store.switchToUsers();
+                    }
                 }
                 else {
                     console.log("FAILED TO LIKE LIST");
@@ -797,6 +810,45 @@ function GlobalStoreContextProvider(props) {
             }
         }
         asyncLikeList(id);
+        // handle USERS OR COMMUNITY IN A SWITCH STATEMENT
+        history.push("/");
+       
+        
+    }
+
+    store.dislikeList = function (id) {
+        async function asyncDislikeList(id) {
+            let response = await api.getPlaylistById(id);
+            if (response.data.success) {
+                let playlist = response.data.playlist;
+
+                if (playlist.likes.includes(auth.user.email)) {
+                    playlist.likes.splice(playlist.likes.indexOf(auth.user.email), 1);
+                    playlist.dislikes.push(auth.user.email);
+                }
+                else if (!playlist.dislikes.includes(auth.user.email)) {
+                    playlist.dislikes.push(auth.user.email );
+                }
+                response = await api.updatePlaylistById(playlist._id, playlist);
+                if (response.data.success) {
+                    console.log("SUCCESSFULLY LIKED LIST");
+                    //history.push("/playlist/" + playlist._id);
+                    if (store.currentView === CurrentView.HOME) {
+                        store.loadIdNamePairs();
+                    }
+                    else if (store.currentView === CurrentView.COMMUNITY) {
+                        store.switchToCommunity();
+                    }
+                    else {
+                        store.switchToUsers();
+                    }
+                }
+                else {
+                    console.log("FAILED TO LIKE LIST");
+                }
+            }
+        }
+        asyncDislikeList(id);
         // handle USERS OR COMMUNITY IN A SWITCH STATEMENT
         history.push("/");
        
