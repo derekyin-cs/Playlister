@@ -37,6 +37,11 @@ export const GlobalStoreActionType = {
     SWITCH_TO_HOME: "SWITCH_TO_HOME",
     SWITCH_TO_COMMUNITY: "SWITCH_TO_COMMUNITY",
     SWITCH_TO_USERS: "SWITCH_TO_USERS",
+    SORT_BY_NAME: "SORT_BY_NAME",
+    SORT_BY_PUBLISH_DATE: "SORT_BY_PUBLISH_DATE",
+    SORT_BY_LISTENS: "SORT_BY_LISTENS",
+    SORT_BY_LIKES: "SORT_BY_LIKES",
+    SORT_BY_DISLIKES: "SORT_BY_DISLIKES"
 }
 
 // WE'LL NEED THIS TO PROCESS TRANSACTIONS
@@ -853,6 +858,47 @@ function GlobalStoreContextProvider(props) {
         history.push("/");
        
         
+    }
+
+    store.sortByName = function () {
+        async function asyncSortByName() {
+            let response = "";
+            if (store.currentView === CurrentView.HOME) {
+                response = await api.getPlaylistPairs();
+            }
+            else {
+                response = await api.getPublishedPlaylistPairs();
+            }
+
+            if (response.data.success) {
+                let pairsArray = response.data.idNamePairs;
+                pairsArray.sort((a, b) => (a.name > b.name) ? 1 : -1);
+                storeReducer({
+                    type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
+                    payload: pairsArray
+                });
+            }
+            
+                
+        }
+            
+        asyncSortByName();
+    }
+
+    store.sortByPublishDate = function () {
+
+    }
+
+    store.sortByListens = function () {
+
+    }
+
+    store.sortByLikes = function () {
+
+    }
+
+    store.sortByDislikes = function () {
+
     }
 
     return (
