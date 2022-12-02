@@ -795,6 +795,9 @@ function GlobalStoreContextProvider(props) {
                 else if (!playlist.likes.includes(auth.user.email)) {
                     playlist.likes.push(auth.user.email );
                 }
+                else if (playlist.likes.includes(auth.user.email)) {
+                    playlist.likes.splice(playlist.likes.indexOf(auth.user.email), 1);
+                }
                 response = await api.updatePlaylistById(playlist._id, playlist);
                 if (response.data.success) {
                     console.log("SUCCESSFULLY LIKED LIST");
@@ -833,6 +836,9 @@ function GlobalStoreContextProvider(props) {
                 }
                 else if (!playlist.dislikes.includes(auth.user.email)) {
                     playlist.dislikes.push(auth.user.email );
+                }
+                else if (playlist.dislikes.includes(auth.user.email)) {
+                    playlist.dislikes.splice(playlist.dislikes.indexOf(auth.user.email), 1);
                 }
                 response = await api.updatePlaylistById(playlist._id, playlist);
                 if (response.data.success) {
