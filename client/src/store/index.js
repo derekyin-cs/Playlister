@@ -428,7 +428,7 @@ function GlobalStoreContextProvider(props) {
     store.duplicateList = async function () {
         let newListName = store.currentList.name + " " + (store.newListCounter + 1);
         let newListSongs = store.currentList.songs; 
-        const response = await api.createPlaylist(newListName, newListSongs, auth.user.email);
+        const response = await api.createPlaylist(newListName, newListSongs, auth.user.email, auth.user.username);
         if (response.status === 201) {
             tps.clearAllTransactions();
             let newList = response.data.playlist;

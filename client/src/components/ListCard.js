@@ -21,7 +21,9 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Item from '@mui/material/Grid';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import WorkspaceScreen from './WorkspaceScreen';
 import EditToolbar from './EditToolbar';
 import AuthContext from '../auth'
@@ -187,6 +189,17 @@ function ListCard(props) {
     let listens = "";
     let likeButton = "";
     let dislikeButton = "";
+    let likeIcon = <ThumbUpAltOutlinedIcon />;
+    let dislikeIcon = <ThumbDownAltOutlinedIcon />;
+
+    if (idNamePair.likes.includes(auth.user.email)){
+        likeIcon = <ThumbUpAltIcon />;
+    }
+
+    if (idNamePair.dislikes.includes(auth.user.email)){
+        dislikeIcon = <ThumbDownAltIcon />;
+    }
+
     let likes = "";
     let dislikes = "";
     if (idNamePair.published) {
@@ -199,7 +212,7 @@ function ListCard(props) {
             handleLikeList(event, idNamePair._id)
             }}
             >
-                <ThumbUpAltOutlinedIcon /> 
+                {likeIcon}
                 {idNamePair.likes.length}
                 </Button>
                 );
@@ -208,7 +221,7 @@ function ListCard(props) {
             handleDislikeList(event, idNamePair._id)
             }}
             >
-                <ThumbDownAltOutlinedIcon />
+                {dislikeIcon}
                 {idNamePair.dislikes.length}
                 </Button>);
         // TODO: ADD LIKE, DISLIKE STATS 
