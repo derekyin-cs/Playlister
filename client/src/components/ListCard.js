@@ -194,7 +194,7 @@ function ListCard(props) {
             key={idNamePair._id}
             sx={{ marginTop: '15px', display: 'flex', p: 1 }}
             style={{ width: '100%', fontSize: '20pt', backgroundColor: '#f5f5f5', borderRadius: '10px', border: '3px solid #e0e0e0' }}
-            onDoubleClick={handleToggleEdit}
+
         >
             <Box sx={{ p: 1, flexGrow: 1, overflowX: 'auto' }}>
                 <Grid container spacing = {.3} >
