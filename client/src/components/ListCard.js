@@ -64,6 +64,14 @@ function ListCard(props) {
         
     }
 
+    function handleLikeList(event, id){
+        store.likeList(id);
+    }
+
+    function handleDislikeList(event, id){
+        store.dislikeList(id);
+    }
+
     function handlePublishList(event) {
         event.stopPropagation();
         store.publishCurrentList();
@@ -179,12 +187,30 @@ function ListCard(props) {
     let listens = "";
     let likeButton = "";
     let dislikeButton = "";
+    let likes = "";
+    let dislikes = "";
     if (idNamePair.published) {
         let date = new Date(idNamePair.publishedDate).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"});
         published = "Published: " + date;
         listens = "Listens: " + idNamePair.listens;
-        likeButton = (<Button><ThumbUpAltOutlinedIcon /></Button>);
-        dislikeButton = (<Button><ThumbDownAltOutlinedIcon /></Button>);
+        likeButton = (
+        <Button 
+            onClick = {(event) => {
+            handleLikeList(event, idNamePair._id)
+            }}
+            >
+                <ThumbUpAltOutlinedIcon /> 
+                {idNamePair.likes.length}
+                </Button>
+                );
+        dislikeButton = (<Button 
+            onClick = {(event) => {
+            handleDislikeList(event, idNamePair._id)
+            }}
+            >
+                <ThumbDownAltOutlinedIcon />
+                {idNamePair.dislikes.length}
+                </Button>);
         // TODO: ADD LIKE, DISLIKE STATS 
     }
 

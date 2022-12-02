@@ -778,6 +778,31 @@ function GlobalStoreContextProvider(props) {
         asyncLoadUsersIdNamePairs();
     }
 
+    store.likeList = function (id) {
+        async function asyncLikeList(id) {
+            let response = await api.getPlaylistById(id);
+            if (response.data.success) {
+                let playlist = response.data.playlist;
+
+                playlist.likes.push({username: auth.user.email} );
+                response = await api.updatePlaylistById(playlist._id, playlist);
+                if (response.data.success) {
+                    console.log("SUCCESSFULLY LIKED LIST");
+                    //history.push("/playlist/" + playlist._id);
+                    store.loadIdNamePairs();
+                }
+                else {
+                    console.log("FAILED TO LIKE LIST");
+                }
+            }
+        }
+        asyncLikeList(id);
+        // handle USERS OR COMMUNITY IN A SWITCH STATEMENT
+        history.push("/");
+       
+        
+    }
+
     return (
         <GlobalStoreContext.Provider value={{
             store

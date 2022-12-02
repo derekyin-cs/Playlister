@@ -108,6 +108,7 @@ export default function AppBanner() {
                     >
                         <Link style={{ textDecoration: 'none', color: 'white' }} to='/' onClick={handleCloseList}>⌂</Link>
                     </Typography>
+                    <Box sx={{ flexGrow: 1 }}></Box>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton
                             size="large"
