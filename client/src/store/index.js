@@ -223,8 +223,8 @@ function GlobalStoreContextProvider(props) {
                     currentModal : CurrentModal.NONE,
                     idNamePairs: store.idNamePairs,
                     currentList: payload,
-                    currentSongIndex: -1,
-                    currentSong: null,
+                    currentSongIndex: 0,
+                    currentSong: payload.songs[0],
                     newListCounter: store.newListCounter,
                     listNameActive: false,
                     listIdMarkedForDeletion: null,
@@ -949,6 +949,8 @@ function GlobalStoreContextProvider(props) {
                     else {
                         store.switchToUsers();
                     }
+
+
                 }
                 else {
                     console.log("FAILED TO LIKE LIST");
