@@ -64,6 +64,23 @@ export default function NavToolbar() {
         handleMenuClose();
     }
 
+    function handleKeyPress(event) {
+        if (event.code === "Enter") {
+            let search = event.target.value;
+            event.target.value = "";
+            switch (store.currentView) {
+                case "COMMUNITY":
+                    store.searchByPlaylist(search);
+                    break;
+                case "USERS":
+                    store.searchByUser(search);
+                    break;
+                default:
+                    break;
+            }
+        }  
+    }
+
     let menuId = "nav-toolbar-sort-by";
     let menu = (
         <Menu
@@ -120,7 +137,14 @@ export default function NavToolbar() {
                 </Grid>
 
                 <Grid item xs={3}>
-                    <TextField id="nav-toolbar-search" fullWidth placeholder="Search..."  size = "small" variant="outlined" style={{backgroundColor:"white"}} />
+                    <TextField 
+                    id="nav-toolbar-search" 
+                    fullWidth placeholder="Search..."  
+                    size = "small" 
+                    variant="outlined" 
+                    style={{backgroundColor:"white"}}
+                    onKeyPress={handleKeyPress} 
+                    />
                 </Grid>
 
                 <Grid item xs={2} />

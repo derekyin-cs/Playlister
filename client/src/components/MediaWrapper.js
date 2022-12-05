@@ -7,6 +7,11 @@ import TextField from '@mui/material/TextField';
 import List from '@mui/material/List';
 import CommentCard from './CommentCard.js';
 import AuthContext from '../auth';
+import Grid from '@mui/material/Grid';
+import FastRewindIcon from '@mui/icons-material/FastRewind';
+import FastForwardIcon from '@mui/icons-material/FastForward';
+import StopIcon from '@mui/icons-material/Stop';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 // import auth
 
 export default function MediaWrapper() {
@@ -23,6 +28,24 @@ export default function MediaWrapper() {
         store.switchToComments();
     }
 
+    function handleFastRewind() {
+        store.fastRewindSong();
+    }
+
+    function handlePlay() {
+        store.playSong();
+    }
+
+    function handlePause() {
+        store.pauseSong();
+    }
+
+    function handleFastForward() {
+        store.fastForwardSong();
+    }
+
+
+
     function handleKeyPress(event) {
         if (event.code === "Enter") {
             let username = auth.user.username;
@@ -38,8 +61,16 @@ export default function MediaWrapper() {
     // box for comment section
     // box for player
     let media = "";
-    let commentBar = "";
+    let mediaBar = "";
     let commentCard = "";
+    let currentListTitle = "";
+    let songNumber = "";
+    let songTitle = "";
+    let songArtist = "";
+
+    if (store.currentList){
+        currentListTitle = store.currentList.title;
+    }
 
     // if (store.currentList){
     //     if (store.currentList.currentSong){
@@ -82,7 +113,7 @@ export default function MediaWrapper() {
             </Box>
             
         );
-        commentBar = (
+        mediaBar = (
             <TextField 
                 id="media-add-comment" 
                 placeholder="Add comment" 
@@ -93,8 +124,63 @@ export default function MediaWrapper() {
     }
 
     else if (store.currentMedia == "PLAYER") {
-        media = "";
+        media = 
+        <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
+        
+        </Box>
         //TODO: IMPLEMENT YOUTUBE API
+
+        mediaBar = <Box sx={{ bgcolor: 'primary', p: 2, borderRadius: '20px', border: '2px solid black', height: '23%'}}>
+            <Grid container spacing={.1}>
+                <Grid item xs={12}>
+                Playlist: {currentListTitle}
+                </Grid>
+                <Grid item xs={12}>
+                Song #: {songNumber}
+                </Grid>
+                <Grid item xs={12}>
+                Title: {songTitle}
+                </Grid>
+                <Grid item xs={12}>
+                Artist: {songArtist}
+                </Grid>
+                
+                <Grid item xs = {3}/>
+                <Grid item xs={6}>
+                <div id="player-toolbar" >
+                <Button 
+                    id='rewind-button'
+                    onClick={handleFastRewind}
+                    variant="contained">
+                        <FastRewindIcon />
+                </Button>
+                <Button 
+                    id='stop-button'
+                    onClick={handlePause}
+                    variant="contained">
+                        <StopIcon />
+                </Button>
+                <Button
+                    id='play-button'
+                    onClick={handlePlay}
+                    variant="contained">
+                    <PlayArrowIcon />
+                </Button>
+                <Button
+                    id='forward-button'
+                    onClick={handleFastForward}
+                    variant="contained">
+                    <FastForwardIcon />
+                </Button>
+                </div>
+                </Grid>
+                <Grid item xs = {3}/>
+            </Grid>
+
+            
+
+
+        </Box>
     }
     
     let playerButtonColor = "blue";
@@ -122,7 +208,7 @@ export default function MediaWrapper() {
 
 
             {media}
-            {commentBar}
+            {mediaBar}
             
             
 
