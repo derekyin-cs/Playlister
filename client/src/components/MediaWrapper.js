@@ -13,11 +13,13 @@ import FastForwardIcon from '@mui/icons-material/FastForward';
 import StopIcon from '@mui/icons-material/Stop';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import YouTube from 'react-youtube';
+import { useState } from 'react';
 // import auth
 
 export default function MediaWrapper() {
     const { store } = useContext(GlobalStoreContext);
     const { auth } = useContext(AuthContext);
+    const [player, setPlayer] = useState(null);
 
 
     function handleSwitchPlayer() {
@@ -30,19 +32,25 @@ export default function MediaWrapper() {
     }
 
     function handleFastRewind() {
-        store.fastRewindSong();
+        store.setPreviousSong();
     }
 
     function handlePlay() {
+        player.playVideo();
         store.playSong();
     }
 
     function handlePause() {
+        player.pauseVideo();
         store.pauseSong();
     }
 
     function handleFastForward() {
-        store.fastForwardSong();
+        store.setNextSong();
+    }
+
+    function videoOnReady(event) {
+        setPlayer(event.target);
     }
 
 
@@ -71,6 +79,7 @@ export default function MediaWrapper() {
 
     let currentSongId = "";
 
+    
     if (store.currentList){
         currentListTitle = store.currentList.name;
     }
@@ -78,6 +87,7 @@ export default function MediaWrapper() {
     if (store.currentSong){
         currentSongId = store.currentSong.youTubeId;
     }
+
 
     // if (store.currentList){
     //     if (store.currentList.currentSong){
@@ -133,7 +143,7 @@ export default function MediaWrapper() {
     else if (store.currentMedia == "PLAYER") {
         media = 
         <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
-        <YouTube videoId = {currentSongId} opts={{height: '230', width: '520'}}/>
+        <YouTube id = "player" videoId = {currentSongId} opts={{height: '230', width: '520'}} onReady={videoOnReady}/>
         </Box>
         //TODO: IMPLEMENT YOUTUBE API
 

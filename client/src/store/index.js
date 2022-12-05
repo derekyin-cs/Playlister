@@ -305,8 +305,8 @@ function GlobalStoreContextProvider(props) {
                     currentModal : CurrentModal.NONE,
                     idNamePairs: store.idNamePairs,
                     currentList: store.currentList,
-                    currentSongIndex: -1,
-                    currentSong: null,
+                    currentSongIndex: store.currentSongIndex,
+                    currentSong: store.currentSong,
                     newListCounter: store.newListCounter,
                     listNameActive: false,
                     listIdMarkedForDeletion: null,
@@ -321,8 +321,8 @@ function GlobalStoreContextProvider(props) {
                     currentModal : CurrentModal.NONE,
                     idNamePairs: store.idNamePairs,
                     currentList: store.currentList,
-                    currentSongIndex: -1,
-                    currentSong: null,
+                    currentSongIndex: store.currentSongIndex,
+                    currentSong: store.currentSong,
                     newListCounter: store.newListCounter,
                     listNameActive: false,
                     listIdMarkedForDeletion: null,
@@ -458,6 +458,23 @@ function GlobalStoreContextProvider(props) {
                     currentMedia: store.currentMedia,
                     currentView: store.currentView,
                     currentSort: CurrentSort.DISLIKES,
+                });
+            }
+
+            case GlobalStoreActionType.SET_CURRENT_SONG: {
+                return setStore({
+                    currentModal : CurrentModal.NONE,
+                    idNamePairs: store.idNamePairs,
+                    currentList: store.currentList,
+                    currentSongIndex: payload,
+                    currentSong: store.currentList.songs[payload],
+                    newListCounter: store.newListCounter,
+                    listNameActive: false,
+                    listIdMarkedForDeletion: null,
+                    listMarkedForDeletion: null,
+                    currentMedia: store.currentMedia,
+                    currentView: store.currentView,
+                    currentSort: store.currentSort,
                 });
             }
 
@@ -1077,6 +1094,38 @@ function GlobalStoreContextProvider(props) {
             type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
             payload: searchArray
         });
+    }
+
+    store.setNextSong = function () {
+        let index = store.currentSongIndex;
+        if (index < store.currentList.songs.length - 1) {
+            storeReducer({
+                type: GlobalStoreActionType.SET_CURRENT_SONG,
+                payload: index + 1
+            });
+        }
+        else {
+            storeReducer({
+                type: GlobalStoreActionType.SET_CURRENT_SONG,
+                payload: 0
+            });
+        }
+    }
+
+    store.setPreviousSong = function () {
+        let index = store.currentSongIndex;
+        if (index > 0) {
+            storeReducer({
+                type: GlobalStoreActionType.SET_CURRENT_SONG,
+                payload: index - 1
+            });
+        }
+        else {
+            storeReducer({
+                type: GlobalStoreActionType.SET_CURRENT_SONG,
+                payload: store.currentList.songs.length - 1
+            });
+        }
     }
 
     return (
