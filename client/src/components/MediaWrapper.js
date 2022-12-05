@@ -12,6 +12,7 @@ import FastRewindIcon from '@mui/icons-material/FastRewind';
 import FastForwardIcon from '@mui/icons-material/FastForward';
 import StopIcon from '@mui/icons-material/Stop';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import YouTube from 'react-youtube';
 // import auth
 
 export default function MediaWrapper() {
@@ -126,7 +127,7 @@ export default function MediaWrapper() {
     else if (store.currentMedia == "PLAYER") {
         media = 
         <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
-        
+        <YouTube opts={{height: '300', width: '520'}}/>
         </Box>
         //TODO: IMPLEMENT YOUTUBE API
 
