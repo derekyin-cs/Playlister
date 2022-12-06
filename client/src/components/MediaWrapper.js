@@ -37,7 +37,7 @@ export default function MediaWrapper() {
 
     function handlePlay() {
         player.playVideo();
-        store.playSong();
+        store.incrementCurrentListens();
     }
 
     function handlePause() {
@@ -86,6 +86,9 @@ export default function MediaWrapper() {
 
     if (store.currentSong){
         currentSongId = store.currentSong.youTubeId;
+        songNumber = store.currentSongIndex + 1;
+        songTitle = store.currentSong.title;
+        songArtist = store.currentSong.artist;
     }
 
 
@@ -149,7 +152,7 @@ export default function MediaWrapper() {
 
         mediaBar = <Box sx={{ bgcolor: 'primary', p: 2, borderRadius: '20px', border: '2px solid black', height: '23%'}}>
             <Grid container spacing={.1}>
-                <Grid item xs={12}>
+                <Grid item xs={12} >
                 Playlist: {currentListTitle}
                 </Grid>
                 <Grid item xs={12}>

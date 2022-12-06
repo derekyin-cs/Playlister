@@ -113,7 +113,7 @@ function GlobalStoreContextProvider(props) {
         listIdMarkedForDeletion: null,
         listMarkedForDeletion: null,
         currentMedia: CurrentMedia.PLAYER,
-        currentView: CurrentView.COMMUNITY,
+        currentView: CurrentView.HOME,
         currentSort: CurrentSort.NONE
     });
     const history = useHistory();
@@ -179,7 +179,7 @@ function GlobalStoreContextProvider(props) {
                     listIdMarkedForDeletion: null,
                     listMarkedForDeletion: null,
                     currentMedia: store.currentMedia,
-                    currentView: store.currentView,
+                    currentView: CurrentView.HOME,
                     currentSort: store.currentSort,
                 })
             }
@@ -556,7 +556,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.duplicateList = async function () {
-        let newListName = store.currentList.name + " " + (store.newListCounter + 1);
+        let newListName = "Copy of " + store.currentList.name + " " + (store.newListCounter + 1);
         let newListSongs = store.currentList.songs; 
         const response = await api.createPlaylist(newListName, newListSongs, auth.user.email, auth.user.username);
         if (response.status === 201) {
@@ -1126,6 +1126,13 @@ function GlobalStoreContextProvider(props) {
                 payload: store.currentList.songs.length - 1
             });
         }
+    }
+
+    store.incrementCurrentListens = function () {
+        let list = store.currentList;
+        list.listens++;
+        store.updateCurrentList();
+        history.push("/");
     }
 
     return (
