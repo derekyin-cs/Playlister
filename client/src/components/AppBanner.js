@@ -59,6 +59,7 @@ export default function AppBanner() {
             <MenuItem onClick={handleMenuClose}><Link to='/register/'>Create New Account</Link></MenuItem>
         </Menu>
     );
+
     const loggedInMenu = 
         <Menu
             anchorEl={anchorEl}
@@ -106,7 +107,7 @@ export default function AppBanner() {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}                        
                     >
-                        <Link style={{ textDecoration: 'none', color: 'white' }} to='/' onClick={handleCloseList}>⌂</Link>
+                        <Link style={{ textDecoration: 'none', color: 'white', fontFamily: "Apple Chancery"}} to='/' onClick={handleCloseList}>Playlister</Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }}></Box>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
