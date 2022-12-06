@@ -139,6 +139,7 @@ export default function MediaWrapper() {
                 placeholder="Add comment" 
                 variant="outlined" 
                 onKeyPress={handleKeyPress} 
+                disabled = {auth.user.email === "GUESTUSER"}
                 />
         );
     }

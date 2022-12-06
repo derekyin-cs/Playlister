@@ -12,12 +12,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import AuthContext from '../auth'
 
 export default function NavToolbar() {
     const {store} = useContext(GlobalStoreContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
+    const { auth } = useContext(AuthContext);
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -121,7 +123,7 @@ export default function NavToolbar() {
 
             <Grid container spacing = {2}>
                 <Grid item xs={2.5}>
-                    <Button onClick = {handleSwitchToHome}>
+                    <Button onClick = {handleSwitchToHome} disabled = {auth.user.email === "GUESTUSER"}>
                         {homeIcon}
                     </Button>
                     <Button onClick = {handleSwitchToCommunity}>

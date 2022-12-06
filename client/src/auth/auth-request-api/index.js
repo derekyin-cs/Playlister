@@ -41,11 +41,15 @@ export const registerUser = (firstName, lastName, username, email, password, pas
         passwordVerify : passwordVerify
     })
 }
+export const guestLogin = () => {
+    return api.post(`/guest/`)
+}
 const apis = {
     getLoggedIn,
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    guestLogin
 }
 
 export default apis

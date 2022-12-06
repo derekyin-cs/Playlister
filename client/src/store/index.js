@@ -113,7 +113,7 @@ function GlobalStoreContextProvider(props) {
         listIdMarkedForDeletion: null,
         listMarkedForDeletion: null,
         currentMedia: CurrentMedia.PLAYER,
-        currentView: CurrentView.HOME,
+        currentView: CurrentView.COMMUNITY,
         currentSort: CurrentSort.NONE
     });
     const history = useHistory();

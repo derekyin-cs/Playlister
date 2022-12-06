@@ -12,6 +12,7 @@ export const AuthActionType = {
     LOGOUT_USER: "LOGOUT_USER",
     REGISTER_USER: "REGISTER_USER",
     ERROR: "ERROR",
+    GUEST_LOGIN: "GUEST_LOGIN"
 }
 
 function AuthContextProvider(props) {
@@ -19,6 +20,7 @@ function AuthContextProvider(props) {
         user: null,
         loggedIn: false,
         errorMessage: "",
+        isGuest: null
     });
     const history = useHistory();
 
@@ -34,6 +36,7 @@ function AuthContextProvider(props) {
                     user: payload.user,
                     loggedIn: payload.loggedIn,
                     errorMessage: "",
+                    isGuest: false
                 });
             }
             case AuthActionType.LOGIN_USER: {
@@ -41,6 +44,7 @@ function AuthContextProvider(props) {
                     user: payload.user,
                     loggedIn: true,
                     errorMessage: "",
+                    isGuest: false
                 })
             }
             case AuthActionType.LOGOUT_USER: {
@@ -48,6 +52,7 @@ function AuthContextProvider(props) {
                     user: null,
                     loggedIn: false,
                     errorMessage: "",
+                    isGuest: false
                 })
             }
             case AuthActionType.REGISTER_USER: {
@@ -55,6 +60,7 @@ function AuthContextProvider(props) {
                     user: payload.user,
                     loggedIn: true,
                     errorMessage: "",
+                    isGuest: false
                 })
             }
             case AuthActionType.ERROR: {
@@ -62,6 +68,15 @@ function AuthContextProvider(props) {
                     user: null,
                     loggedIn: false,
                     errorMessage: payload.errorMessage,
+                    isGuest: false
+                })
+            }
+            case AuthActionType.GUEST_LOGIN: {
+                return setAuth({
+                    user: {username: "Guest", email: "", firstName: "", lastName: ""},
+                    loggedIn: true,
+                    errorMessage: "",
+                    isGuest: true
                 })
             }
             default:
@@ -160,6 +175,7 @@ function AuthContextProvider(props) {
         }
         return initials;
     }
+
 
     return (
         <AuthContext.Provider value={{

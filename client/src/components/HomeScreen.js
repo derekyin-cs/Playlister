@@ -21,7 +21,8 @@ const HomeScreen = () => {
 
 
     useEffect(() => {
-        store.loadIdNamePairs();
+        //store.loadIdNamePairs();
+        store.switchToCommunity();
     }, []);
 
     

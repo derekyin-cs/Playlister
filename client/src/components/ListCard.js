@@ -169,6 +169,7 @@ function ListCard(props) {
                     <Button
                         variant="contained"
                         onClick={handleDuplicateList}
+                        disabled = {auth.user.email === "GUESTUSER"}
                     >
                         Duplicate
                     </Button>
@@ -211,6 +212,7 @@ function ListCard(props) {
             onClick = {(event) => {
             handleLikeList(event, idNamePair._id)
             }}
+            disabled = {auth.user.email === "GUESTUSER"}
             >
                 {likeIcon}
                 {idNamePair.likes.length}
@@ -220,6 +222,7 @@ function ListCard(props) {
             onClick = {(event) => {
             handleDislikeList(event, idNamePair._id)
             }}
+            disabled = {auth.user.email === "GUESTUSER"}
             >
                 {dislikeIcon}
                 {idNamePair.dislikes.length}
