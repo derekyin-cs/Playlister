@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import { GlobalStoreContext } from '../store/index.js'
 import { useContext } from 'react';
 import TextField from '@mui/material/TextField';
+import { useEffect } from 'react';
 import List from '@mui/material/List';
 import CommentCard from './CommentCard.js';
 import AuthContext from '../auth';
@@ -14,13 +15,13 @@ import StopIcon from '@mui/icons-material/Stop';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import YouTube from 'react-youtube';
 import { useState } from 'react';
+import Tabs from '@mui/material/Tabs';
 // import auth
 
 export default function MediaWrapper() {
     const { store } = useContext(GlobalStoreContext);
     const { auth } = useContext(AuthContext);
     const [player, setPlayer] = useState(null);
-
 
     function handleSwitchPlayer() {
         // TODO
@@ -33,6 +34,8 @@ export default function MediaWrapper() {
 
     function handleFastRewind() {
         store.setPreviousSong();
+
+        
     }
 
     function handlePlay() {
@@ -47,6 +50,8 @@ export default function MediaWrapper() {
 
     function handleFastForward() {
         store.setNextSong();
+        
+        
     }
 
     function videoOnReady(event) {
@@ -114,7 +119,7 @@ export default function MediaWrapper() {
 
     if (store.currentList && store.currentMedia == "COMMENTS" && store.currentList.comments.length > 0) {
         commentCard = 
-        <List sx={{ width: '90%', left: '5%', bgcolor: 'background.paper' }}>
+        <List sx={{ width: '90%', left: '5%', bgcolor: '#e6e6e6s' }}>
         {
             store.currentList.comments.map((comments) => (
                 <CommentCard
@@ -128,7 +133,7 @@ export default function MediaWrapper() {
     }
     if (store.currentMedia == "COMMENTS") {
         media = (
-            <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black', overflowY: "scroll", flexDirection: "column-reverse" }}>
+            <Box sx={{ bgcolor: '#e6e6e6', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black', overflowY: "scroll", flexDirection: "column-reverse" }}>
                 {commentCard}
             </Box>
             
@@ -147,22 +152,22 @@ export default function MediaWrapper() {
     else if (store.currentMedia == "PLAYER") {
         media = 
         <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
-        <YouTube id = "player" videoId = {currentSongId} opts={{height: '230', width: '520'}} onReady={videoOnReady}/>
+        <YouTube id = "player" videoId = {currentSongId} opts={{height: '230', width: '520'}} onReady={videoOnReady} onEnd={handleFastForward}/>
         </Box>
         //TODO: IMPLEMENT YOUTUBE API
 
         mediaBar = <Box sx={{ bgcolor: 'primary', p: 2, borderRadius: '20px', border: '2px solid black', height: '23%'}}>
             <Grid container spacing={.1}>
-                <Grid item xs={12} >
+                <Grid item xs={12} fontWeight='bold' >
                 Playlist: {currentListTitle}
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} fontWeight='bold' >
                 Song #: {songNumber}
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} fontWeight='bold' >
                 Title: {songTitle}
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} fontWeight='bold' >
                 Artist: {songArtist}
                 </Grid>
                 

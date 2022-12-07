@@ -121,7 +121,7 @@ export default function NavToolbar() {
     return (
         <div id="nav-toolbar">
 
-            <Grid container spacing = {2}>
+            <Grid container spacing = {2} >
                 <Grid item xs={2.5}>
                     <Button onClick = {handleSwitchToHome} disabled = {auth.user.email === "GUESTUSER"}>
                         {homeIcon}
@@ -149,15 +149,15 @@ export default function NavToolbar() {
                     />
                 </Grid>
 
-                <Grid item xs={2} />
+                <Grid item xs={3} />
 
-                <Grid item xs={2}>
+                <Grid item xs={1}>
                     <Button
                     onClick = {handleMenuOpen}
                     aria-controls={menuId}
                     aria-haspopup="true"
                     >
-                        Sort By 
+                        Sort
                         <SortOutlinedIcon />
                         
                     </Button>

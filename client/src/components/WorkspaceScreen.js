@@ -39,6 +39,10 @@ function WorkspaceScreen() {
     else if (store.isRemoveSongModalOpen()) {
         modalJSX = <MUIRemoveSongModal />;
     }
+
+    let songListColor = "black";
+
+
     let songList = "";
     if (store.currentList) {
         if (!store.currentList.published){
@@ -66,7 +70,7 @@ function WorkspaceScreen() {
             >
             {
                 store.currentList.songs.map((song, index) => (
-                    <Typography>{index+1 + ". " + song.title + " by " + song.artist}</Typography>
+                    <Typography sx={store.currentSongIndex === index ? {color: 'blue', fontWeight: 'bold'} : {color: 'black'}}>{index+1 + ". " + song.title + " by " + song.artist}</Typography>
                 ))  
                 
             }
