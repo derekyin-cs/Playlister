@@ -70,7 +70,7 @@ function WorkspaceScreen() {
             >
             {
                 store.currentList.songs.map((song, index) => (
-                    <Typography sx={store.currentSongIndex === index ? {color: 'blue', fontWeight: 'bold'} : {color: 'black'}}>{index+1 + ". " + song.title + " by " + song.artist}</Typography>
+                    <Typography sx={store.playingSongIndex === index ? {color: 'blue', fontWeight: 'bold'} : {color: 'black'}}>{index+1 + ". " + song.title + " by " + song.artist}</Typography>
                 ))  
                 
             }

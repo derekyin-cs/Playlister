@@ -89,11 +89,11 @@ export default function MediaWrapper() {
         currentListTitle = store.currentList.name;
     }
 
-    if (store.currentSong){
-        currentSongId = store.currentSong.youTubeId;
-        songNumber = store.currentSongIndex + 1;
-        songTitle = store.currentSong.title;
-        songArtist = store.currentSong.artist;
+    if (store.playingSong){
+        currentSongId = store.playingSong.youTubeId;
+        songNumber = store.playingSongIndex + 1;
+        songTitle = store.playingSong.title;
+        songArtist = store.playingSong.artist;
     }
 
 
@@ -152,7 +152,7 @@ export default function MediaWrapper() {
     else if (store.currentMedia == "PLAYER") {
         media = 
         <Box sx={{ bgcolor: 'lightgray', p: 2, flexGrow: 1, borderRadius: '20px', border: '2px solid black'}}>
-        <YouTube id = "player" videoId = {currentSongId} opts={{height: '230', width: '520'}} onReady={videoOnReady} onEnd={handleFastForward}/>
+        <YouTube id = "player" videoId = {currentSongId} opts={{height: '230', width: '520'}} onReady={videoOnReady} onEnd={handleFastForward} />
         </Box>
         //TODO: IMPLEMENT YOUTUBE API
 

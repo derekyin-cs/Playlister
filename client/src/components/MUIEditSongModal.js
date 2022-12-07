@@ -32,6 +32,7 @@ export default function MUIEditSongModal() {
     function handleCancelEditSong(event) {
         event.stopPropagation();
         store.hideModals();
+        store.updateCurrentList();
     }
 
     function handleUpdateTitle(event) {

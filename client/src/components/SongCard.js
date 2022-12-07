@@ -37,6 +37,7 @@ function SongCard(props) {
         store.showRemoveSongModal(index, song);
     }
     function handleClick(event) {
+        event.preventDefault();
         event.stopPropagation();
         // DOUBLE CLICK IS FOR SONG EDITING
         if (event.detail === 2) {

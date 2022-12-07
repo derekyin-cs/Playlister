@@ -56,7 +56,7 @@ function ListCard(props) {
     }
 
     function handleToggleEdit(event) {
-
+        event.preventDefault();
         event.stopPropagation();
         if (!idNamePair.published){
             toggleEdit();
@@ -236,11 +236,11 @@ function ListCard(props) {
             key={idNamePair._id}
             sx={{ marginTop: '15px', display: 'flex', p: 1 }}
             style={{ width: '100%', fontSize: '20pt', backgroundColor: '#f5f5f5', borderRadius: '10px', border: '3px solid #e0e0e0' }}
-
+            
         >
             <Box sx={{ p: 1, flexGrow: 1, overflowX: 'auto' }}>
                 <Grid container spacing = {.3} >
-                    <Grid item xs={8} fontWeight="bold" onClick={handleToggleEdit}>
+                    <Grid item xs={8} fontWeight="bold" onDoubleClick={handleToggleEdit}>
                         {idNamePair.name}
                     </Grid>
                     <Grid item xs={4}>
