@@ -963,20 +963,24 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.switchToUsers = () => {
-        async function asyncLoadUsersIdNamePairs() {
-            const response = await api.getPublishedPlaylistPairs();
-            if (response.data.success) {
-                let pairsArray = response.data.idNamePairs;
-                storeReducer({
-                    type: GlobalStoreActionType.SWITCH_TO_USERS,
-                    payload: pairsArray
-                });
-            }
-            else {
-                console.log("API FAILED TO GET THE LIST PAIRS");
-            }
-        }
-        asyncLoadUsersIdNamePairs();
+        storeReducer({
+            type: GlobalStoreActionType.SWITCH_TO_USERS,
+            payload: []
+        });
+        // async function asyncLoadUsersIdNamePairs() {
+        //     const response = await api.getPublishedPlaylistPairs();
+        //     if (response.data.success) {
+        //         let pairsArray = response.data.idNamePairs;
+        //         storeReducer({
+        //             type: GlobalStoreActionType.SWITCH_TO_USERS,
+        //             payload: []
+        //         });
+        //     }
+        //     else {
+        //         console.log("API FAILED TO GET THE LIST PAIRS");
+        //     }
+        // }
+        // asyncLoadUsersIdNamePairs();
     }
 
     store.likeList = function (id) {
@@ -1124,17 +1128,37 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.searchByUser = (search) => {
-        let pairsArray = store.idNamePairs;
-        let searchArray = [];
-        for (let i = 0; i < pairsArray.length; i++) {
-            if (pairsArray[i].username.toLowerCase().includes(search.toLowerCase())) {
-                searchArray.push(pairsArray[i]);
+        async function asyncSearchByUser() {
+            const response = await api.getPublishedPlaylistPairs();
+            if (response.data.success && search !== "") {
+                let pairsArray = response.data.idNamePairs;
+                let searchArray = [];
+                for (let i = 0; i < pairsArray.length; i++) {
+                    if (pairsArray[i].username.toLowerCase().includes(search.toLowerCase())) {
+                        searchArray.push(pairsArray[i]);
+                    }
+                }
+                storeReducer({
+                    type: GlobalStoreActionType.SWITCH_TO_USERS,
+                    payload: searchArray
+                });
+            }
+            else {
+                console.log("API FAILED TO GET THE LIST PAIRS");
             }
         }
-        storeReducer({
-            type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
-            payload: searchArray
-        });
+        asyncSearchByUser();
+        // let pairsArray = store.idNamePairs;
+        // let searchArray = [];
+        // for (let i = 0; i < pairsArray.length; i++) {
+        //     if (pairsArray[i].username.toLowerCase().includes(search.toLowerCase())) {
+        //         searchArray.push(pairsArray[i]);
+        //     }
+        // }
+        // storeReducer({
+        //     type: GlobalStoreActionType.LOAD_ID_NAME_PAIRS,
+        //     payload: searchArray
+        // });
     }
 
     store.setNextSong = function () {
