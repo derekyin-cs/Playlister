@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
     This toolbar is a functional React component that
     manages the undo/redo/close buttons.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 function EditToolbar() {
     const { store } = useContext(GlobalStoreContext);

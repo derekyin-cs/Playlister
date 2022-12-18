@@ -17,7 +17,7 @@ import Typography from '@mui/material/Typography';
     This React component lets us edit a loaded list, which only
     happens when we are on the proper route.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 function WorkspaceScreen() {
     const { store } = useContext(GlobalStoreContext);

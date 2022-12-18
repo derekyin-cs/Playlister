@@ -5,7 +5,7 @@ const User = require('../models/user-model');
     our database needs. Note that this file contains the controller
     functions for each endpoint.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 createPlaylist = (req, res) => {
     const body = req.body;
@@ -145,6 +145,7 @@ getPlaylistPairs = async (req, res) => {
                 }
             }).catch(err => console.log(err))
         }
+        
         asyncFindList(user.email);
     }).catch(err => console.log(err))
 }
@@ -180,6 +181,7 @@ getPublishedPlaylistPairs = async (req, res) => {
                         likes: list.likes,
                         dislikes: list.dislikes
                     };
+                    
                     pairs.push(pair);
                 }
                 return res.status(200).json({ success: true, idNamePairs: pairs })

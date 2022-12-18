@@ -5,8 +5,8 @@ import jsTPS_Transaction from "../common/jsTPS.js"
  * This class represents a transaction that creates a song
  * in the playlist. It will be managed by the transaction stack.
  * 
- * @author McKilla Gorilla
- * @author ?
+ * @author Derek Yin
+ * 
  */
 export default class CreateSong_Transaction extends jsTPS_Transaction {
     constructor(initStore, initIndex, initSong) {

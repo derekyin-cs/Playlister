@@ -2,7 +2,7 @@
     This is where we'll route all of the received http requests
     into controller response functions.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 const express = require('express')
 const PlaylistController = require('../controllers/playlist-controller')

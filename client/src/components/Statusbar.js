@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 /*
     Our Status bar React component goes at the bottom of our UI.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 function Statusbar() {
     const { store } = useContext(GlobalStoreContext);

@@ -7,7 +7,7 @@
     to use when sending JSON back and forth and it`s a Promise-
     based API which helps a lot with asynchronous communication.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 
 import axios from 'axios'

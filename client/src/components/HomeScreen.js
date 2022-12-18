@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 /*
     This React component lists all the top5 lists in the UI.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 const HomeScreen = () => {
     const { store } = useContext(GlobalStoreContext);

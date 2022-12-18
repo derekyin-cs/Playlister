@@ -32,7 +32,7 @@ import AuthContext from '../auth'
     a list for editing and it has controls for changing its 
     name or deleting it.
     
-    @author McKilla Gorilla
+    @author Derek Yin
 */
 function ListCard(props) {
     const { store } = useContext(GlobalStoreContext);
